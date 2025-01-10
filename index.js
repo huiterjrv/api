@@ -32,16 +32,13 @@ app.use(cors({
 
 app.get('/', (req, res) => {
 
-    const clientIp = req.socket.remoteAddress || req.headers['x-forwarded-for'];
-    const serverIp = req.socket.localAddress;
+    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    console.log(req.socket.remoteAddress);
 
-    console.log(req.headers);
-
-    // Respuesta en formato JSON
+    //console.log(req.headers);
     res.json({
         message: 'Información de la solicitud',
         clientIp: clientIp,
-        serverIp: serverIp,
         headers: req.headers
     });
 });
