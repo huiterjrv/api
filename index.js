@@ -31,17 +31,19 @@ app.use(cors({
 
 
 app.get('/', (req, res) => {
-
     const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    console.log(req.socket.remoteAddress);
+    const serverIp = req.socket.localAddress;
 
-    //console.log(req.headers);
+    console.log(req.headers);
+
     res.json({
         message: 'Información de la solicitud',
         clientIp: clientIp,
+        serverIp: serverIp,
         headers: req.headers
     });
 });
+
 
 const PORT = process.env.PORT ?? 3003
 
